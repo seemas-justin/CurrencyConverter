@@ -10,9 +10,10 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.KWDCurrencyConverter"
+        android:name=".CurrencyConverterApp"
         tools:targetApi="31">
         <activity
-            android:name="com.kwdcurrencyconverter.CurrencyConverterActivity"
+            android:name="com.kwdcurrencyconverter.presentation.CurrencyConverterActivity"
             android:exported="true"
             android:theme="@style/Theme.KWDCurrencyConverter.NoActionBar">
             <intent-filter>

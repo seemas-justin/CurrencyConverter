@@ -7,7 +7,7 @@
     android:paddingTop="50dp"
     android:paddingStart="20dp"
     android:paddingEnd="20dp"
-    tools:context=".CurrencyConverterFragment">
+    tools:context=".presentation.CurrencyConverterFragment">
         <EditText
             android:id="@+id/edittext_currency"
             android:layout_width="match_parent"
@@ -34,4 +34,8 @@
                 android:layout_alignParentEnd="true"
                 />
         </RelativeLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycularview_currency_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </androidx.appcompat.widget.LinearLayoutCompat>
