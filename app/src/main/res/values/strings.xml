@@ -12,4 +12,6 @@
     <string name="please_the_amount_kd_for_conversion">Please the amount(KD) for conversion</string>
     <string name="convert">Convert</string>
     <string name="refresh_rate">Refresh Rate</string>
+    <string name="one_kd_equalent">1 KD #value#</string>
+    <string name="currency_converter">Currency Converter</string>
 </resources>

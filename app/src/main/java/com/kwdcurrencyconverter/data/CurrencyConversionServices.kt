@@ -6,6 +6,6 @@ import retrofit2.http.GET
 
 interface CurrencyConversionServices {
 
-    @GET("latest?symbols=symbols&base=KWD")
+    @GET("latest?base=KWD")
     suspend fun getCurrencyConversionRate(): Response<CurrencySymbolsResponse>
 }

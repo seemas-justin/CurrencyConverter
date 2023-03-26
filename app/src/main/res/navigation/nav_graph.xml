@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/FirstFragment"
         android:name="com.kwdcurrencyconverter.presentation.CurrencyConverterFragment"
-        android:label="@string/first_fragment_label"
+        android:label="@string/currency_converter"
         tools:layout="@layout/fragment_currency_converter">
 
     </fragment>
