@@ -8,6 +8,6 @@ data class CurrencySymbolsResponse (
     @SerializedName("rates")
     val extras: Map<String, Double>,
     @SerializedName("timestamp")
-    val timestamp: Double
+    val timestamp: Long
 
 )

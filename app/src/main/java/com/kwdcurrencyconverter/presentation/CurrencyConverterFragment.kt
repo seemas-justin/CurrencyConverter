@@ -68,10 +68,10 @@ class CurrencyConverterFragment : Fragment(), LifecycleObserver {
         viewModel.currencyListLoadingState.observe(viewLifecycleOwner) {
             if(it){
                 binding.recycularviewCurrencyList.visibility = View.GONE
-                binding.progressViewLayout.visibility = View.VISIBLE
+                binding.progressViewLayout.root.visibility = View.VISIBLE
             }else{
                 binding.recycularviewCurrencyList.visibility = View.VISIBLE
-                binding.progressViewLayout.visibility = View.GONE
+                binding.progressViewLayout.root.visibility = View.GONE
             }
         }
     }
