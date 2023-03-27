@@ -1,7 +1,5 @@
-package com.kwdcurrencyconverter
+package com.kwdcurrencyconverter.data
 
-import com.kwdcurrencyconverter.data.CurrencyConversionServices
-import com.kwdcurrencyconverter.data.CurrencyConverterRepositoryImpl
 import com.kwdcurrencyconverter.data.models.CurrencySymbolsResponse
 import io.mockk.coEvery
 import io.mockk.coVerify

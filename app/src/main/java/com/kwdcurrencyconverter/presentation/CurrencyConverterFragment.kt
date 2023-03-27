@@ -44,10 +44,18 @@ class CurrencyConverterFragment : Fragment(), LifecycleObserver {
 
         }
         binding.buttonRefreshRate.setOnClickListener{
-            viewModel.getCurrencyConversionList()
+            /*
+                Get the number to be converted and
+                if it has value then request it with that number else with null
+             */
+            val numberToConvert = binding.edittextCurrency.text.toString()
+            viewModel.getCurrencyConversionList(
+                numberToConvert.ifEmpty { null }
+            )
+
         }
         initialiseObeservers()
-
+        viewModel.initialise()
     }
 
     fun initialiseObeservers(){
@@ -66,13 +74,24 @@ class CurrencyConverterFragment : Fragment(), LifecycleObserver {
         }
 
         viewModel.currencyListLoadingState.observe(viewLifecycleOwner) {
-            if(it){
-                binding.recycularviewCurrencyList.visibility = View.GONE
-                binding.progressViewLayout.root.visibility = View.VISIBLE
+            if(isFirstTimeLoad){
+                if(it){
+                    binding.content.visibility = View.GONE
+                    binding.mainProgressLayout.root.visibility = View.VISIBLE
+                }else{
+                    binding.content.visibility = View.VISIBLE
+                    binding.mainProgressLayout.root.visibility = View.GONE
+                }
             }else{
-                binding.recycularviewCurrencyList.visibility = View.VISIBLE
-                binding.progressViewLayout.root.visibility = View.GONE
+                if(it){
+                    binding.recycularviewCurrencyList.visibility = View.GONE
+                    binding.progressViewLayout.root.visibility = View.VISIBLE
+                }else{
+                    binding.recycularviewCurrencyList.visibility = View.VISIBLE
+                    binding.progressViewLayout.root.visibility = View.GONE
+                }
             }
+
         }
     }
 

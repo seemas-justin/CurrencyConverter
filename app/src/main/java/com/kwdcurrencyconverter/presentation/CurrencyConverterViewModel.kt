@@ -23,13 +23,27 @@ class CurrencyConverterViewModel @Inject constructor(
     val currencyListLoadingState: LiveData<Boolean>
      get() = _currencyListLoadingState
 
-    fun getCurrencyConversionList() {
+    fun initialise(){
+        getCurrencyConversionList(null)
+    }
+
+
+    fun getCurrencyConversionList(conversionNumber: String?) {
         viewModelScope.launch {
              _currencyListLoadingState.postValue(true)
              currencyConverterRepository.getCurrencyConversionValues()
                 .onSuccess {
-                    _currencyListLoadingState.postValue(false)
-                    _currencyListState.postValue(it)
+                    /*
+                        if there is some value in conversion number, happens during update
+                        then once the result is back do a convertion
+                     */
+                    if(conversionNumber == null) {
+                        _currencyListLoadingState.postValue(false)
+                        _currencyListState.postValue(it)
+                    }else{
+                        convertCurrency(conversionNumber)
+                    }
+
                 }
                  .onFailure {
                      _currencyListLoadingState.postValue(false)
@@ -43,17 +57,31 @@ class CurrencyConverterViewModel @Inject constructor(
 
     }
 
-    fun convertCurrency(currencyValue: String) {
+
+     fun convertCurrency(conversionNumber: String) {
         if (currencyListState.value?.currencyItems!=null) {
-            val list: List<CurrencyItemEntity> = _currencyListState.value?.currencyItems!!
-            list.forEach {
-                it.calculatedValue = it.conversionValue * currencyValue.toDouble()
-            }
+            val updatedList = calculateConvertedValue(conversionNumber, currencyListState.value?.currencyItems)
+            _currencyListLoadingState.postValue(false)
             _currencyListState.postValue(
                 currencyListState.value!!.copy(
-                currencyItems = list
+                currencyItems = updatedList
             ))
+        }else {
+            _currencyListLoadingState.postValue(false)
         }
+    }
+
+    private fun calculateConvertedValue(conversionNumber: String, currencyList: List<CurrencyItemEntity>?): List<CurrencyItemEntity>?{
+        return if(currencyList!=null) {
+            val toUpdateCurrencyList: List<CurrencyItemEntity> = currencyList
+            toUpdateCurrencyList.forEach {
+                it.calculatedValue = it.conversionValue * conversionNumber.toDouble()
+            }
+            toUpdateCurrencyList
+        }else{
+            null
+        }
+
     }
 
 
