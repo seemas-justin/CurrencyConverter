@@ -30,12 +30,12 @@ class CurrencyConverterViewModel @Inject constructor(
 
     fun getCurrencyConversionList(conversionNumber: String?) {
         viewModelScope.launch {
-             _currencyListLoadingState.postValue(true)
-             currencyConverterRepository.getCurrencyConversionValues()
+            _currencyListLoadingState.postValue(true)
+              currencyConverterRepository.getCurrencyConversionValues()
                 .onSuccess {
                     /*
                         if there is some value in conversion number, happens during update
-                        then once the result is back do a convertion
+                        then once the result is back do a conversion
                      */
                     if(conversionNumber == null) {
                         _currencyListLoadingState.postValue(false)

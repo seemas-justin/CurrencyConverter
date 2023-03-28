@@ -11,8 +11,11 @@ import org.junit.Test
 import retrofit2.Response
 
 class CurrencyConverterRepositoryImplTest {
+
+
     @Test
     fun testIfCurrencyListsAreRecievedItsReturned(){
+
         // arrange
         val currencyConversionServices: CurrencyConversionServices = mockk()
         coEvery { currencyConversionServices.getCurrencyConversionRate() } returns Response.success(CurrencySymbolsResponse(
@@ -22,12 +25,14 @@ class CurrencyConverterRepositoryImplTest {
                 "AED" to 234444.78,
                 "INR" to 2856.0
             )))
-
          val sut = CurrencyConverterRepositoryImpl(
             currencyConversionServices = currencyConversionServices
          )
         runBlocking {
+            // act
             val res = sut.getCurrencyConversionValues()
+
+            //assert
             Assert.assertEquals(res.isSuccess, true)
             Assert.assertEquals(res.getOrNull()?.currencyItems?.size, 2)
         }
@@ -46,7 +51,9 @@ class CurrencyConverterRepositoryImplTest {
             currencyConversionServices = currencyConversionServices
         )
         runBlocking {
+            //act
             val res = sut.getCurrencyConversionValues()
+            //assert
             Assert.assertEquals(res.isFailure, true)
         }
 
